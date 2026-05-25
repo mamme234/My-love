@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>For My Queen</title>
+    <style>
+        body {
+            background-color: #fdfaf6;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            font-family: 'Georgia', serif;
+        }
+        .container {
+            text-align: center;
+            animation: fadeIn 3s ease-in;
+        }
+        svg {
+            width: 300px;
+            height: auto;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
+        }
+        h1 { color: #5a4a42; margin-top: 20px; font-size: 1.5rem; }
+        p { color: #8e7f77; font-style: italic; max-width: 300px; line-height: 1.5; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <!-- SVG Drawing of her based on the photo -->
+    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+        <!-- Hair (The Cloud Shape) -->
+        <path d="M40,100 Q20,80 40,50 T80,30 T120,30 T160,50 T180,80 T160,120 T140,160 T100,180 T60,160 T40,120 Z" 
+              fill="none" stroke="#333" stroke-width="2" />
+        
+        <!-- Face Tilted Oval -->
+        <ellipse cx="105" cy="100" rx="45" ry="55" 
+                 transform="rotate(15, 105, 100)" fill="white" stroke="#333" stroke-width="1.5" />
+        
+        <!-- Happy Eyes -->
+        <path d="M85,90 Q95,85 105,90" fill="none" stroke="#333" stroke-width="1.5" transform="rotate(15, 105, 100)" />
+        <path d="M125,95 Q135,90 145,95" fill="none" stroke="#333" stroke-width="1.5" transform="rotate(15, 105, 100)" />
+        
+        <!-- The Beautiful Smile -->
+        <path d="M85,130 Q115,155 145,125" fill="none" stroke="#333" stroke-width="2.5" transform="rotate(10, 105, 100)" />
+        
+        <!-- Ruffled Collar -->
+        <path d="M70,155 Q80,145 90,155 T110,155 T130,155 T150,155" fill="none" stroke="#333" stroke-width="1" />
+    </svg>
+
+    <h1>You are the Melody</h1>
+    
+    <!-- Poem in English and Amharic -->
+    <p>
+        "Your smile is the only light I need." <br>
+        <span style="font-size: 0.9rem;">ፈገግታሽ ለኔ የልቤ ብርሃን ነው።</span>
+    </p>
+</div>
+
+</body>
+</html>
