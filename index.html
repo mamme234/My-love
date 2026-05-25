@@ -1,64 +1,238 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>For My Queen</title>
-    <style>
-        body {
-            background-color: #fdfaf6;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-            margin: 0;
-            font-family: 'Georgia', serif;
-        }
-        .container {
-            text-align: center;
-            animation: fadeIn 3s ease-in;
-        }
-        svg {
-            width: 300px;
-            height: auto;
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.1));
-        }
-        h1 { color: #5a4a42; margin-top: 20px; font-size: 1.5rem; }
-        p { color: #8e7f77; font-style: italic; max-width: 300px; line-height: 1.5; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cinematic Portrait Draw</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    background:linear-gradient(135deg,#050505,#1a1a1a,#000);
+    height:100vh;
+    overflow:hidden;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-family:Arial,sans-serif;
+}
+
+.wrapper{
+    position:relative;
+    animation:float 4s ease-in-out infinite;
+}
+
+canvas{
+    border-radius:20px;
+    max-width:90vw;
+    max-height:90vh;
+    box-shadow:
+        0 0 20px rgba(255,255,255,0.15),
+        0 0 50px rgba(255,255,255,0.08),
+        0 0 80px rgba(255,255,255,0.05);
+    filter:contrast(110%) brightness(105%);
+}
+
+.glow{
+    position:absolute;
+    inset:-20px;
+    border-radius:30px;
+    background:linear-gradient(45deg,
+    rgba(255,255,255,0.05),
+    transparent,
+    rgba(255,255,255,0.05));
+    z-index:-1;
+    filter:blur(20px);
+    animation:pulse 3s infinite alternate;
+}
+
+.loadingText{
+    position:absolute;
+    bottom:-45px;
+    width:100%;
+    text-align:center;
+    color:white;
+    font-size:18px;
+    letter-spacing:3px;
+    animation:blink 1.5s infinite;
+}
+
+@keyframes pulse{
+    from{
+        transform:scale(1);
+        opacity:0.5;
+    }
+    to{
+        transform:scale(1.05);
+        opacity:1;
+    }
+}
+
+@keyframes float{
+    0%{
+        transform:translateY(0px);
+    }
+    50%{
+        transform:translateY(-10px);
+    }
+    100%{
+        transform:translateY(0px);
+    }
+}
+
+@keyframes blink{
+    0%,100%{
+        opacity:1;
+    }
+    50%{
+        opacity:0.3;
+    }
+}
+</style>
 </head>
 <body>
 
-<div class="container">
-    <!-- SVG Drawing of her based on the photo -->
-    <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-        <!-- Hair (The Cloud Shape) -->
-        <path d="M40,100 Q20,80 40,50 T80,30 T120,30 T160,50 T180,80 T160,120 T140,160 T100,180 T60,160 T40,120 Z" 
-              fill="none" stroke="#333" stroke-width="2" />
-        
-        <!-- Face Tilted Oval -->
-        <ellipse cx="105" cy="100" rx="45" ry="55" 
-                 transform="rotate(15, 105, 100)" fill="white" stroke="#333" stroke-width="1.5" />
-        
-        <!-- Happy Eyes -->
-        <path d="M85,90 Q95,85 105,90" fill="none" stroke="#333" stroke-width="1.5" transform="rotate(15, 105, 100)" />
-        <path d="M125,95 Q135,90 145,95" fill="none" stroke="#333" stroke-width="1.5" transform="rotate(15, 105, 100)" />
-        
-        <!-- The Beautiful Smile -->
-        <path d="M85,130 Q115,155 145,125" fill="none" stroke="#333" stroke-width="2.5" transform="rotate(10, 105, 100)" />
-        
-        <!-- Ruffled Collar -->
-        <path d="M70,155 Q80,145 90,155 T110,155 T130,155 T150,155" fill="none" stroke="#333" stroke-width="1" />
-    </svg>
-
-    <h1>You are the Melody</h1>
-    
-    <!-- Poem in English and Amharic -->
-    <p>
-        "Your smile is the only light I need." <br>
-        <span style="font-size: 0.9rem;">ፈገግታሽ ለኔ የልቤ ብርሃን ነው።</span>
-    </p>
+<div class="wrapper">
+    <div class="glow"></div>
+    <canvas id="canvas"></canvas>
+    <div class="loadingText">DRAWING PORTRAIT...</div>
 </div>
 
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const loadingText = document.querySelector('.loadingText');
+
+const img = new Image();
+img.src = 'photo.jpg';
+
+img.onload = () => {
+
+    canvas.width = img.width;
+    canvas.height = img.height;
+
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    let y = 0;
+
+    function animateDraw(){
+
+        ctx.drawImage(
+            img,
+            0,y,
+            img.width,2,
+            0,y,
+            canvas.width,2
+        );
+
+        let imageData = ctx.getImageData(0,y,canvas.width,2);
+        let data = imageData.data;
+
+        for(let i=0;i<data.length;i+=4){
+
+            const r = data[i];
+            const g = data[i+1];
+            const b = data[i+2];
+
+            const gray = (r+g+b)/3;
+
+            const sketch = gray > 120
+                ? 255
+                : gray * 0.5;
+
+            data[i] = sketch;
+            data[i+1] = sketch;
+            data[i+2] = sketch;
+        }
+
+        ctx.putImageData(imageData,0,y);
+
+        // glowing scan line
+        ctx.beginPath();
+        ctx.moveTo(0,y);
+        ctx.lineTo(canvas.width,y);
+        ctx.strokeStyle = 'rgba(255,255,255,0.7)';
+        ctx.lineWidth = 2;
+        ctx.stroke();
+
+        y += 2;
+
+        if(y < canvas.height){
+            requestAnimationFrame(animateDraw);
+        }else{
+            loadingText.innerHTML = 'PORTRAIT COMPLETE';
+            loadingText.style.color = '#ffffff';
+
+            // final cinematic fade
+            canvas.animate([
+                {transform:'scale(1)'},
+                {transform:'scale(1.03)'},
+                {transform:'scale(1)'}
+            ],{
+                duration:2000,
+                iterations:1
+            });
+        }
+    }
+
+    animateDraw();
+}
+
+// background particles
+const particleCanvas = document.createElement('canvas');
+const pctx = particleCanvas.getContext('2d');
+particleCanvas.style.position = 'fixed';
+particleCanvas.style.top = 0;
+particleCanvas.style.left = 0;
+particleCanvas.style.zIndex = '-1';
+document.body.appendChild(particleCanvas);
+
+function resizeParticles(){
+    particleCanvas.width = window.innerWidth;
+    particleCanvas.height = window.innerHeight;
+}
+resizeParticles();
+window.addEventListener('resize', resizeParticles);
+
+const particles = [];
+
+for(let i=0;i<80;i++){
+    particles.push({
+        x:Math.random()*particleCanvas.width,
+        y:Math.random()*particleCanvas.height,
+        r:Math.random()*2,
+        d:Math.random()*1
+    });
+}
+
+function animateParticles(){
+    pctx.clearRect(0,0,particleCanvas.width,particleCanvas.height);
+
+    particles.forEach(p=>{
+        pctx.beginPath();
+        pctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        pctx.fillStyle='rgba(255,255,255,0.25)';
+        pctx.fill();
+
+        p.y += p.d;
+
+        if(p.y > particleCanvas.height){
+            p.y = 0;
+            p.x = Math.random()*particleCanvas.width;
+        }
+    });
+
+    requestAnimationFrame(animateParticles);
+}
+
+animateParticles();
+
+</script>
 </body>
 </html>
