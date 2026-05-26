@@ -15,294 +15,13 @@
 
 body{
     overflow:hidden;
-    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
+    height:100vh;
     background:
-    radial-gradient(circle at center,
-    #240010 0%,
-    #120008 45%,
-    #000 100%);
+    radial-gradient(circle,#2b0f18,#000);
     font-family:Arial,sans-serif;
-}
-
-/* ========================= */
-/* BIOMETRIC SCAN */
-/* ========================= */
-
-#scanScreen{
-    position:fixed;
-    inset:0;
-    background:black;
-    z-index:9999;
-    overflow:hidden;
-}
-
-/* camera glow */
-
-.cameraGlow{
-    position:absolute;
-    width:700px;
-    height:700px;
-    border-radius:50%;
-
-    background:
-    radial-gradient(circle,
-    rgba(255,0,120,0.15),
-    transparent 70%);
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    filter:blur(60px);
-
-    animation:pulse 3s infinite alternate;
-}
-
-@keyframes pulse{
-
-    from{
-        transform:
-        translate(-50%,-50%)
-        scale(1);
-
-        opacity:0.5;
-    }
-
-    to{
-        transform:
-        translate(-50%,-50%)
-        scale(1.15);
-
-        opacity:1;
-    }
-}
-
-/* face cards */
-
-.faceBox{
-    position:absolute;
-
-    width:250px;
-    height:320px;
-
-    top:50%;
-
-    transform:translateY(-50%);
-
-    border-radius:30px;
-
-    overflow:hidden;
-
-    border:
-    2px solid rgba(255,255,255,0.15);
-
-    box-shadow:
-    0 0 30px rgba(255,0,120,0.25);
-}
-
-.leftBox{
-    left:10%;
-}
-
-.rightBox{
-    right:10%;
-}
-
-.face{
-    width:100%;
-    height:100%;
-    object-fit:cover;
-}
-
-/* biometric corners */
-
-.corner{
-    position:absolute;
-    width:40px;
-    height:40px;
-    border:4px solid hotpink;
-}
-
-.tl{
-    top:10px;
-    left:10px;
-    border-right:none;
-    border-bottom:none;
-}
-
-.tr{
-    top:10px;
-    right:10px;
-    border-left:none;
-    border-bottom:none;
-}
-
-.bl{
-    bottom:10px;
-    left:10px;
-    border-right:none;
-    border-top:none;
-}
-
-.br{
-    bottom:10px;
-    right:10px;
-    border-left:none;
-    border-top:none;
-}
-
-/* scan line */
-
-.scanLine{
-    position:absolute;
-    width:100%;
-    height:5px;
-
-    background:
-    linear-gradient(
-    90deg,
-    transparent,
-    hotpink,
-    white,
-    hotpink,
-    transparent);
-
-    box-shadow:
-    0 0 25px hotpink,
-    0 0 50px deeppink;
-
-    animation:scanMove 2.5s linear infinite;
-}
-
-@keyframes scanMove{
-
-    from{
-        top:0;
-    }
-
-    to{
-        top:100%;
-    }
-}
-
-/* face mesh */
-
-.mesh{
-    position:absolute;
-    inset:0;
-
-    background-image:
-    radial-gradient(
-    rgba(255,105,180,0.8) 1px,
-    transparent 1px);
-
-    background-size:24px 24px;
-
-    opacity:0.35;
-
-    animation:rotateMesh 10s linear infinite;
-}
-
-@keyframes rotateMesh{
-
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
-}
-
-/* center biometric ring */
-
-.ring{
-    position:absolute;
-
-    width:180px;
-    height:180px;
-
-    border-radius:50%;
-
-    border:3px solid hotpink;
-
-    left:50%;
-    top:50%;
-
-    transform:translate(-50%,-50%);
-
-    box-shadow:
-    0 0 20px hotpink,
-    inset 0 0 20px hotpink;
-
-    animation:ringPulse 1.8s infinite;
-}
-
-@keyframes ringPulse{
-
-    0%{
-        transform:
-        translate(-50%,-50%)
-        scale(1);
-
-        opacity:1;
-    }
-
-    100%{
-        transform:
-        translate(-50%,-50%)
-        scale(1.3);
-
-        opacity:0;
-    }
-}
-
-/* status */
-
-.scanText{
-    position:absolute;
-
-    bottom:10%;
-
-    width:100%;
-
-    text-align:center;
-
-    color:white;
-
-    font-size:30px;
-
-    letter-spacing:5px;
-
-    text-shadow:
-    0 0 10px pink,
-    0 0 20px deeppink;
-
-    animation:blink 1s infinite;
-}
-
-@keyframes blink{
-
-    50%{
-        opacity:0.4;
-    }
-}
-
-/* ========================= */
-/* MAIN */
-/* ========================= */
-
-.bgGlow{
-    position:fixed;
-    width:700px;
-    height:700px;
-    border-radius:50%;
-    background:rgba(255,120,180,0.1);
-    filter:blur(120px);
 }
 
 .container{
@@ -310,49 +29,36 @@ body{
 }
 
 canvas{
+    width:90vw;
+    max-width:700px;
+    border-radius:20px;
     background:white;
 
-    border-radius:25px;
-
-    max-width:92vw;
-    max-height:88vh;
-
     box-shadow:
-    0 0 25px rgba(255,255,255,0.2),
-    0 0 80px rgba(255,120,180,0.25);
+    0 0 20px rgba(255,255,255,0.15),
+    0 0 40px rgba(255,120,180,0.2);
 }
 
-/* brush hand */
-
-#hand{
+/* Pencil */
+#pencil{
     position:absolute;
-    width:170px;
-    z-index:5;
+    width:120px;
+    z-index:10;
     pointer-events:none;
-
-    filter:
-    drop-shadow(0 0 15px rgba(0,0,0,0.5))
-    drop-shadow(0 0 25px rgba(255,120,180,0.4));
-
-    transition:all 0.03s linear;
+    transform-origin:center;
+    filter:drop-shadow(0 0 8px rgba(0,0,0,0.4));
 }
 
-/* romantic text */
-
+/* Title */
 .title{
     position:absolute;
     width:100%;
-    bottom:-95px;
-
+    bottom:-90px;
     text-align:center;
-
     color:white;
-
     font-size:24px;
-
+    letter-spacing:4px;
     line-height:1.7;
-
-    letter-spacing:3px;
 
     animation:glow 2s infinite alternate;
 }
@@ -360,17 +66,38 @@ canvas{
 @keyframes glow{
 
     from{
-        opacity:0.7;
         text-shadow:0 0 5px pink;
     }
 
     to{
-        opacity:1;
-
         text-shadow:
-        0 0 10px pink,
-        0 0 20px hotpink,
-        0 0 40px deeppink;
+        0 0 10px hotpink,
+        0 0 20px deeppink;
+    }
+}
+
+/* Hearts */
+.heart{
+    position:fixed;
+    color:rgba(255,120,180,0.5);
+    animation:floatUp linear infinite;
+    pointer-events:none;
+}
+
+@keyframes floatUp{
+
+    from{
+        transform:translateY(0) scale(1);
+        opacity:0;
+    }
+
+    20%{
+        opacity:1;
+    }
+
+    to{
+        transform:translateY(-120vh) scale(1.7);
+        opacity:0;
     }
 }
 
@@ -378,72 +105,15 @@ canvas{
 </head>
 <body>
 
-<!-- ========================= -->
-<!-- BIOMETRIC SCAN -->
-<!-- ========================= -->
-
-<div id="scanScreen">
-
-    <div class="cameraGlow"></div>
-
-    <!-- YOUR FACE -->
-
-    <div class="faceBox leftBox">
-
-        <img src="me.jpg" class="face">
-
-        <div class="mesh"></div>
-
-        <div class="scanLine"></div>
-
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
-
-    </div>
-
-    <!-- HER FACE -->
-
-    <div class="faceBox rightBox">
-
-        <img src="her.jpg" class="face">
-
-        <div class="mesh"></div>
-
-        <div class="scanLine"></div>
-
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
-
-    </div>
-
-    <!-- center -->
-
-    <div class="ring"></div>
-
-    <div class="scanText">
-        BIOMETRIC LOVE MATCH ❤️
-    </div>
-
-</div>
-
-<!-- ========================= -->
-<!-- MAIN -->
-<!-- ========================= -->
-
-<div class="bgGlow"></div>
-
 <div class="container">
 
     <canvas id="canvas"></canvas>
 
-    <!-- paint brush -->
-
-    <img id="hand"
-    src="https://pngimg.com/d/paint_brush_PNG24.png">
+    <!-- Pencil -->
+    <img
+    id="pencil"
+    src="https://i.imgur.com/9yG3Y2D.png"
+    >
 
     <div class="title">
         MY QUEEN ❤️
@@ -453,96 +123,14 @@ canvas{
 
 <script>
 
-/* ========================= */
-/* MUSIC */
-/* ========================= */
-
-const audioCtx =
-new (window.AudioContext ||
-window.webkitAudioContext)();
-
-function tone(freq,time,duration){
-
-    const osc =
-    audioCtx.createOscillator();
-
-    const gain =
-    audioCtx.createGain();
-
-    osc.type = 'sine';
-
-    osc.frequency.value = freq;
-
-    gain.gain.setValueAtTime(
-        0,
-        audioCtx.currentTime
-    );
-
-    gain.gain.linearRampToValueAtTime(
-        0.04,
-        audioCtx.currentTime + 0.1
-    );
-
-    gain.gain.linearRampToValueAtTime(
-        0,
-        audioCtx.currentTime + duration
-    );
-
-    osc.connect(gain);
-
-    gain.connect(audioCtx.destination);
-
-    osc.start(time);
-
-    osc.stop(time + duration);
-}
-
-function music(){
-
-    const notes = [
-        261.63,
-        329.63,
-        392.00,
-        523.25,
-        392.00,
-        329.63
-    ];
-
-    let t = audioCtx.currentTime;
-
-    notes.forEach((n,i)=>{
-
-        tone(
-            n,
-            t + i*0.45,
-            0.8
-        );
-    });
-
-    setTimeout(music,3500);
-}
-
-document.body.addEventListener(
-'click',
-()=>{
-    audioCtx.resume();
-    music();
-},{
-    once:true
-});
-
-/* ========================= */
-/* DRAWING */
-/* ========================= */
-
 const canvas =
 document.getElementById('canvas');
 
 const ctx =
 canvas.getContext('2d');
 
-const hand =
-document.getElementById('hand');
+const pencil =
+document.getElementById('pencil');
 
 const title =
 document.querySelector('.title');
@@ -551,15 +139,29 @@ const img = new Image();
 
 img.src = 'photo.jpg';
 
-function startDrawing(){
+img.onload = () => {
 
-    img.onload = ()=>{
+    canvas.width = img.width;
+    canvas.height = img.height;
 
-        canvas.width = img.width;
-        canvas.height = img.height;
+    // White paper
+    ctx.fillStyle = 'white';
+    ctx.fillRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
+    let progress = 0;
+
+    // SPEED LIKE MBC3
+    const speed = 30;
+
+    function animate(){
+
+        // Clear
         ctx.fillStyle = 'white';
-
         ctx.fillRect(
             0,
             0,
@@ -567,152 +169,142 @@ function startDrawing(){
             canvas.height
         );
 
-        // hidden image
-
-        const hidden =
-        document.createElement('canvas');
-
-        hidden.width = img.width;
-        hidden.height = img.height;
-
-        const hctx =
-        hidden.getContext('2d');
-
-        hctx.drawImage(img,0,0);
-
-        const pixels =
-        hctx.getImageData(
+        // Draw revealed image
+        ctx.drawImage(
+            img,
             0,
             0,
-            img.width,
-            img.height
-        ).data;
+            progress,
+            canvas.height,
+            0,
+            0,
+            progress,
+            canvas.height
+        );
 
-        let points = [];
+        // Pencil Sketch Look
+        let imageData =
+        ctx.getImageData(
+            0,
+            0,
+            progress,
+            canvas.height
+        );
 
-        for(let y=0;y<img.height;y+=2){
+        let data = imageData.data;
 
-            for(let x=0;x<img.width;x+=2){
+        for(let i=0;i<data.length;i+=4){
 
-                const i =
-                (y*img.width + x)*4;
+            const r = data[i];
+            const g = data[i+1];
+            const b = data[i+2];
 
-                const r = pixels[i];
-                const g = pixels[i+1];
-                const b = pixels[i+2];
+            const gray =
+            (r+g+b)/3;
 
-                const gray =
-                (r+g+b)/3;
+            const sketch =
+            gray > 140
+            ? 255
+            : gray*0.55;
 
-                if(gray < 250){
-
-                    points.push({
-                        x,
-                        y
-                    });
-                }
-            }
+            data[i] = sketch;
+            data[i+1] = sketch;
+            data[i+2] = sketch;
         }
 
-        points.sort(()=>Math.random()-0.5);
+        ctx.putImageData(
+            imageData,
+            0,
+            0
+        );
 
-        let index = 0;
+        // Pencil Position
+        pencil.style.left =
+        (
+            canvas.offsetLeft +
+            progress - 40
+        ) + 'px';
 
-        function animate(){
+        pencil.style.top =
+        (
+            canvas.offsetTop +
+            canvas.height/2
+        ) + 'px';
 
-            for(let s=0;s<150;s++){
+        pencil.style.transform =
+        'rotate(15deg)';
 
-                if(index >= points.length){
+        progress += speed;
 
-                    title.innerHTML =
-                    `
-                    You are my queen ❤️<br>
-                    My forever happiness ❤️
-                    `;
+        if(progress < canvas.width){
 
-                    return;
+            requestAnimationFrame(
+                animate
+            );
+
+        }else{
+
+            // Final poem
+            title.innerHTML = `
+            You are my light,<br>
+            My peace, my queen,<br>
+            My forever love ❤️
+            `;
+
+            canvas.animate([
+                {
+                    transform:'scale(1)'
+                },
+                {
+                    transform:'scale(1.03)'
+                },
+                {
+                    transform:'scale(1)'
                 }
-
-                const p = points[index];
-
-                const i =
-                (p.y*img.width+p.x)*4;
-
-                const r = pixels[i];
-                const g = pixels[i+1];
-                const b = pixels[i+2];
-
-                // realistic paint stroke
-
-                ctx.beginPath();
-
-                ctx.strokeStyle =
-                `rgba(${r},${g},${b},0.85)`;
-
-                ctx.lineWidth =
-                Math.random()*4+1;
-
-                ctx.lineCap='round';
-
-                ctx.shadowColor =
-                `rgba(${r},${g},${b},0.5)`;
-
-                ctx.shadowBlur = 8;
-
-                ctx.moveTo(
-                    p.x,
-                    p.y
-                );
-
-                ctx.lineTo(
-                    p.x + Math.random()*6,
-                    p.y + Math.random()*4
-                );
-
-                ctx.stroke();
-
-                // hand move
-
-                hand.style.left =
-                (canvas.offsetLeft + p.x - 60)
-                + 'px';
-
-                hand.style.top =
-                (canvas.offsetTop + p.y - 40)
-                + 'px';
-
-                hand.style.transform =
-                `rotate(${
-                    10 + Math.sin(index/20)*6
-                }deg)`;
-
-                index++;
-            }
-
-            requestAnimationFrame(animate);
+            ],{
+                duration:2500
+            });
         }
-
-        animate();
-    };
-
-    if(img.complete){
-        img.onload();
     }
+
+    animate();
 }
 
-/* start after scan */
+/* Romantic Hearts */
 
-setTimeout(()=>{
+for(let i=0;i<30;i++){
 
-    document
-    .getElementById('scanScreen')
-    .remove();
+    const heart =
+    document.createElement('div');
 
-    startDrawing();
+    heart.className = 'heart';
 
-},5000);
+    heart.innerHTML = '❤';
+
+    heart.style.left =
+    Math.random()*100 + 'vw';
+
+    heart.style.top =
+    '100vh';
+
+    heart.style.fontSize =
+    (
+        15 +
+        Math.random()*30
+    ) + 'px';
+
+    heart.style.animationDuration =
+    (
+        4 +
+        Math.random()*5
+    ) + 's';
+
+    document.body.appendChild(
+        heart
+    );
+}
 
 </script>
 
 </body>
-    </html>
+</html>
