@@ -27,7 +27,7 @@ body{
     font-family:Arial,sans-serif;
 }
 
-/* Background Glow */
+/* Romantic Glow */
 
 .bgGlow{
     position:fixed;
@@ -40,6 +40,7 @@ body{
 }
 
 @keyframes pulse{
+
     from{
         transform:scale(1);
         opacity:0.5;
@@ -51,7 +52,7 @@ body{
     }
 }
 
-/* Main Container */
+/* Main */
 
 .container{
     position:relative;
@@ -83,18 +84,21 @@ canvas{
     drop-shadow(0 0 20px rgba(255,120,180,0.3));
 }
 
-/* Romantic Text */
+/* Title */
 
 .title{
     position:absolute;
     width:100%;
-    bottom:-90px;
+    bottom:-95px;
 
     text-align:center;
+
     color:white;
 
     font-size:24px;
+
     line-height:1.7;
+
     letter-spacing:3px;
 
     animation:glow 2s infinite alternate;
@@ -117,7 +121,7 @@ canvas{
     }
 }
 
-/* Floating Hearts */
+/* Hearts */
 
 .heart{
     position:fixed;
@@ -179,9 +183,12 @@ canvas{
 
     <canvas id="canvas"></canvas>
 
-    <!-- Drawing Hand -->
+    <!-- HAND IMAGE -->
+    <!-- Put your own hand PNG in folder -->
+    <!-- Rename it to hand.png -->
+
     <img id="hand"
-    src="https://i.imgur.com/Q7aZK9p.png">
+    src="hand.png">
 
     <div class="title">
         MY QUEEN ❤️
@@ -189,8 +196,8 @@ canvas{
 
 </div>
 
-<!-- Romantic Music -->
-<!-- Put your song in same folder -->
+<!-- Romantic Song -->
+<!-- Put romantic music in folder -->
 <!-- Rename it to love.mp3 -->
 
 <audio autoplay loop>
@@ -211,129 +218,164 @@ document.getElementById('hand');
 const title =
 document.querySelector('.title');
 
+/* GIRL PHOTO */
+
 const img = new Image();
 
 img.src = 'photo.jpg';
 
 /* ========================= */
-/* FRONT CAMERA SCAN */
+/* PRIVATE LOVE SCANNER */
 /* ========================= */
 
-async function startCamera(){
+function startCamera(){
 
-    const video =
-    document.createElement('video');
+    const overlay =
+    document.createElement('div');
 
-    video.autoplay = true;
-    video.playsInline = true;
+    overlay.style.position = 'fixed';
 
-    video.style.position = 'fixed';
-    video.style.inset = '0';
+    overlay.style.inset = '0';
 
-    video.style.width = '100%';
-    video.style.height = '100%';
+    overlay.style.background =
+    'radial-gradient(circle,#220010,#000)';
 
-    video.style.objectFit = 'cover';
+    overlay.style.zIndex = '9999';
 
-    video.style.zIndex = '9998';
+    document.body.appendChild(overlay);
 
-    document.body.appendChild(video);
+    // YOUR FACE
 
-    try{
+    const me =
+    document.createElement('img');
 
-        const stream =
-        await navigator.mediaDevices
-        .getUserMedia({
-            video:{
-                facingMode:'user'
-            }
-        });
+    me.src = 'me.jpg';
 
-        video.srcObject = stream;
+    me.style.position = 'absolute';
 
-        // scan line
+    me.style.left = '12%';
 
-        const scan =
-        document.createElement('div');
+    me.style.top = '50%';
 
-        scan.style.position = 'fixed';
+    me.style.transform =
+    'translateY(-50%)';
 
-        scan.style.left = '0';
+    me.style.width = '220px';
 
-        scan.style.width = '100%';
+    me.style.height = '220px';
 
-        scan.style.height = '5px';
+    me.style.borderRadius = '50%';
 
-        scan.style.background =
-        'linear-gradient(90deg,transparent,pink,white,pink,transparent)';
+    me.style.objectFit = 'cover';
 
-        scan.style.boxShadow =
-        '0 0 20px hotpink';
+    me.style.border =
+    '4px solid rgba(255,255,255,0.3)';
 
-        scan.style.zIndex = '9999';
+    me.style.boxShadow =
+    '0 0 30px hotpink';
 
-        document.body.appendChild(scan);
+    overlay.appendChild(me);
 
-        // text
+    // HER FACE
 
-        const txt =
-        document.createElement('div');
+    const her =
+    document.createElement('img');
 
-        txt.innerHTML =
-        'LOVE SCAN INITIALIZING ❤️';
+    her.src = 'her.jpg';
 
-        txt.style.position = 'fixed';
+    her.style.position = 'absolute';
 
-        txt.style.bottom = '12%';
+    her.style.right = '12%';
 
-        txt.style.width = '100%';
+    her.style.top = '50%';
 
-        txt.style.textAlign = 'center';
+    her.style.transform =
+    'translateY(-50%)';
 
-        txt.style.color = 'white';
+    her.style.width = '220px';
 
-        txt.style.fontSize = '28px';
+    her.style.height = '220px';
 
-        txt.style.letterSpacing = '4px';
+    her.style.borderRadius = '50%';
 
-        txt.style.textShadow =
-        '0 0 10px pink';
+    her.style.objectFit = 'cover';
 
-        txt.style.zIndex = '9999';
+    her.style.border =
+    '4px solid rgba(255,255,255,0.3)';
 
-        document.body.appendChild(txt);
+    her.style.boxShadow =
+    '0 0 30px hotpink';
 
-        let pos = 0;
+    overlay.appendChild(her);
 
-        const interval =
-        setInterval(()=>{
+    // SCAN LINE
 
-            pos += 8;
+    const scan =
+    document.createElement('div');
 
-            scan.style.top =
-            pos + 'px';
+    scan.style.position = 'absolute';
 
-            if(pos > window.innerHeight){
+    scan.style.left = '0';
 
-                clearInterval(interval);
+    scan.style.width = '100%';
 
-                stream.getTracks()
-                .forEach(track=>track.stop());
+    scan.style.height = '5px';
 
-                video.remove();
-                scan.remove();
-                txt.remove();
+    scan.style.background =
+    'linear-gradient(90deg,transparent,pink,white,pink,transparent)';
 
-                startDrawing();
-            }
+    scan.style.boxShadow =
+    '0 0 20px hotpink';
 
-        },16);
+    overlay.appendChild(scan);
 
-    }catch(e){
+    // TEXT
 
-        // if camera denied
-        startDrawing();
-    }
+    const txt =
+    document.createElement('div');
+
+    txt.innerHTML =
+    'PRIVATE LOVE SCAN ❤️';
+
+    txt.style.position = 'absolute';
+
+    txt.style.bottom = '12%';
+
+    txt.style.width = '100%';
+
+    txt.style.textAlign = 'center';
+
+    txt.style.color = 'white';
+
+    txt.style.fontSize = '28px';
+
+    txt.style.letterSpacing = '4px';
+
+    txt.style.textShadow =
+    '0 0 10px pink';
+
+    overlay.appendChild(txt);
+
+    let pos = 0;
+
+    const interval =
+    setInterval(()=>{
+
+        pos += 8;
+
+        scan.style.top =
+        pos + 'px';
+
+        if(pos > window.innerHeight){
+
+            clearInterval(interval);
+
+            overlay.remove();
+
+            startDrawing();
+        }
+
+    },16);
 }
 
 /* ========================= */
@@ -345,6 +387,7 @@ function startDrawing(){
     img.onload = ()=>{
 
         canvas.width = img.width;
+
         canvas.height = img.height;
 
         ctx.fillStyle = 'white';
@@ -362,6 +405,7 @@ function startDrawing(){
         document.createElement('canvas');
 
         hidden.width = img.width;
+
         hidden.height = img.height;
 
         const hctx =
@@ -379,7 +423,7 @@ function startDrawing(){
 
         let points = [];
 
-        // create draw points
+        // create sketch points
 
         for(let y=0;y<img.height;y+=3){
 
@@ -389,7 +433,9 @@ function startDrawing(){
                 (y*img.width + x)*4;
 
                 const r = pixels[i];
+
                 const g = pixels[i+1];
+
                 const b = pixels[i+2];
 
                 const gray =
@@ -421,27 +467,13 @@ function startDrawing(){
                     You are my happiness forever ❤️
                     `;
 
-                    canvas.animate([
-                        {
-                            transform:'scale(1)'
-                        },
-                        {
-                            transform:'scale(1.03)'
-                        },
-                        {
-                            transform:'scale(1)'
-                        }
-                    ],{
-                        duration:3000
-                    });
-
                     return;
                 }
 
                 const p =
                 points[index];
 
-                // realistic sketch stroke
+                // realistic pencil stroke
 
                 ctx.beginPath();
 
@@ -465,7 +497,7 @@ function startDrawing(){
 
                 ctx.stroke();
 
-                // move hand
+                // hand movement
 
                 hand.style.left =
                 (canvas.offsetLeft + p.x - 45)
@@ -487,6 +519,11 @@ function startDrawing(){
         }
 
         animate();
+    };
+
+    // FIX image cache issue
+    if(img.complete){
+        img.onload();
     }
 }
 
@@ -553,4 +590,4 @@ setInterval(()=>{
 </script>
 
 </body>
-</html>
+    </html>
