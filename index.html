@@ -3,7 +3,6 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>MY QUEEN ❤️</title>
 
 <style>
@@ -23,16 +22,16 @@ body{
 
     background:
     radial-gradient(circle at center,
-    #300015 0%,
+    #2a0012 0%,
     #120008 45%,
     #000 100%);
 
     font-family:Arial,sans-serif;
 }
 
-/* ===================== */
-/* BIOMETRIC SCREEN */
-/* ===================== */
+/* ========================= */
+/* SCAN SCREEN */
+/* ========================= */
 
 #scanScreen{
     position:fixed;
@@ -52,7 +51,7 @@ body{
 
     background:
     radial-gradient(circle,
-    rgba(255,0,120,0.18),
+    rgba(255,0,120,0.2),
     transparent 70%);
 
     left:50%;
@@ -89,7 +88,7 @@ body{
 .faceBox{
     position:absolute;
 
-    width:250px;
+    width:240px;
     height:320px;
 
     top:50%;
@@ -104,7 +103,7 @@ body{
     2px solid rgba(255,255,255,0.2);
 
     box-shadow:
-    0 0 30px rgba(255,0,120,0.3);
+    0 0 30px rgba(255,0,120,0.25);
 }
 
 .leftBox{
@@ -121,12 +120,12 @@ body{
     object-fit:cover;
 }
 
-/* corners */
-
 .corner{
     position:absolute;
+
     width:40px;
     height:40px;
+
     border:4px solid hotpink;
 }
 
@@ -157,8 +156,6 @@ body{
     border-left:none;
     border-top:none;
 }
-
-/* scan line */
 
 .scanLine{
     position:absolute;
@@ -193,8 +190,6 @@ body{
     }
 }
 
-/* mesh */
-
 .mesh{
     position:absolute;
     inset:0;
@@ -221,8 +216,6 @@ body{
         transform:rotate(360deg);
     }
 }
-
-/* center ring */
 
 .ring{
     position:absolute;
@@ -265,8 +258,6 @@ body{
     }
 }
 
-/* scan text */
-
 .scanText{
     position:absolute;
 
@@ -296,9 +287,9 @@ body{
     }
 }
 
-/* ===================== */
+/* ========================= */
 /* MAIN */
-/* ===================== */
+/* ========================= */
 
 .bgGlow{
     position:fixed;
@@ -316,21 +307,6 @@ body{
 
 .container{
     position:relative;
-
-    animation:movieFade 2s ease;
-}
-
-@keyframes movieFade{
-
-    from{
-        opacity:0;
-        transform:scale(0.95);
-    }
-
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
 }
 
 canvas{
@@ -341,8 +317,6 @@ canvas{
 
     max-width:92vw;
     max-height:88vh;
-
-    image-rendering:auto;
 
     box-shadow:
     0 0 25px rgba(255,255,255,0.2),
@@ -367,37 +341,43 @@ canvas{
         transform:scale(1.01);
 
         box-shadow:
-        0 0 40px rgba(255,255,255,0.4),
+        0 0 35px rgba(255,255,255,0.4),
         0 0 120px rgba(255,0,120,0.4);
     }
 }
 
-/* hand */
+/* ========================= */
+/* CUSTOM HAND */
+/* ========================= */
 
 #hand{
     position:absolute;
 
-    width:170px;
+    width:220px;
 
     z-index:5;
 
     pointer-events:none;
 
-    transition:all 0.03s linear;
+    transition:all 0.02s linear;
+
+    transform-origin:top left;
 
     filter:
-    drop-shadow(0 0 15px rgba(0,0,0,0.5))
-    drop-shadow(0 0 25px rgba(255,120,180,0.4));
+    drop-shadow(0 0 10px rgba(0,0,0,0.5))
+    drop-shadow(0 0 20px rgba(255,0,120,0.4));
 }
 
-/* title */
+/* ========================= */
+/* TITLE */
+/* ========================= */
 
 .title{
     position:absolute;
 
     width:100%;
 
-    bottom:-100px;
+    bottom:-95px;
 
     text-align:center;
 
@@ -405,7 +385,7 @@ canvas{
 
     font-size:24px;
 
-    line-height:1.8;
+    line-height:1.7;
 
     letter-spacing:3px;
 
@@ -460,15 +440,13 @@ canvas{
 </head>
 <body>
 
-<!-- ===================== -->
-<!-- BIOMETRIC -->
-<!-- ===================== -->
+<!-- ========================= -->
+<!-- SCAN -->
+<!-- ========================= -->
 
 <div id="scanScreen">
 
     <div class="cameraGlow"></div>
-
-    <!-- YOUR PHOTO -->
 
     <div class="faceBox leftBox">
 
@@ -484,8 +462,6 @@ canvas{
         <div class="corner br"></div>
 
     </div>
-
-    <!-- HER PHOTO -->
 
     <div class="faceBox rightBox">
 
@@ -510,9 +486,9 @@ canvas{
 
 </div>
 
-<!-- ===================== -->
+<!-- ========================= -->
 <!-- MAIN -->
-<!-- ===================== -->
+<!-- ========================= -->
 
 <div class="bgGlow"></div>
 
@@ -520,8 +496,10 @@ canvas{
 
     <canvas id="canvas"></canvas>
 
+    <!-- CUSTOM SVG HAND -->
+
     <img id="hand"
-    src="https://pngimg.com/d/paint_brush_PNG24.png">
+    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='220'%3E%3Crect width='400' height='220' fill='transparent'/%3E%3Cg transform='rotate(-10 120 120)'%3E%3Cellipse cx='110' cy='120' rx='70' ry='45' fill='%23f1c7a3'/%3E%3Crect x='150' y='92' width='170' height='18' rx='9' fill='%23d18b00'/%3E%3Cpolygon points='320,85 390,101 390,119 320,109' fill='%23333'/%3E%3Cpolygon points='390,101 400,110 390,119' fill='%23000'/%3E%3C/g%3E%3C/svg%3E">
 
     <div class="title">
         MY QUEEN ❤️
@@ -531,9 +509,9 @@ canvas{
 
 <script>
 
-/* ===================== */
-/* AUDIO */
-/* ===================== */
+/* ========================= */
+/* MUSIC */
+/* ========================= */
 
 const audioCtx =
 new (window.AudioContext ||
@@ -610,9 +588,9 @@ document.body.addEventListener(
     once:true
 });
 
-/* ===================== */
+/* ========================= */
 /* HEARTS */
-/* ===================== */
+/* ========================= */
 
 function createHeart(){
 
@@ -645,9 +623,9 @@ function createHeart(){
 
 setInterval(createHeart,300);
 
-/* ===================== */
+/* ========================= */
 /* DRAWING */
-/* ===================== */
+/* ========================= */
 
 const canvas =
 document.getElementById("canvas");
@@ -669,7 +647,7 @@ function startDrawing(){
 
     img.onload = ()=>{
 
-        const scale = 1.5;
+        const scale = 1.2;
 
         canvas.width =
         img.width * scale;
@@ -697,11 +675,7 @@ function startDrawing(){
         const hctx =
         hidden.getContext("2d");
 
-        hctx.drawImage(
-            img,
-            0,
-            0
-        );
+        hctx.drawImage(img,0,0);
 
         const pixels =
         hctx.getImageData(
@@ -712,6 +686,8 @@ function startDrawing(){
         ).data;
 
         let y = 0;
+
+        /* WIDE PENCIL FAST DRAW */
 
         function drawRow(){
 
@@ -724,18 +700,7 @@ function startDrawing(){
 
             let x = 0;
 
-            function drawPixel(){
-
-                if(x >= img.width){
-
-                    y += 2;
-
-                    requestAnimationFrame(
-                        drawRow
-                    );
-
-                    return;
-                }
+            while(x < img.width){
 
                 const i =
                 (y * img.width + x) * 4;
@@ -749,7 +714,7 @@ function startDrawing(){
                 (r+g+b)/3;
 
                 if(
-                    brightness < 250 &&
+                    brightness < 248 &&
                     a > 0
                 ){
 
@@ -760,11 +725,13 @@ function startDrawing(){
                         ${r},
                         ${g},
                         ${b},
-                        0.9
+                        0.92
                     )`;
 
+                    /* WIDE PENCIL */
+
                     ctx.lineWidth =
-                    Math.random()*1.8 + 0.5;
+                    5 + Math.random()*3;
 
                     ctx.lineCap = "round";
 
@@ -775,7 +742,7 @@ function startDrawing(){
                         ${r},
                         ${g},
                         ${b},
-                        0.8
+                        0.7
                     )`;
 
                     ctx.moveTo(
@@ -784,46 +751,46 @@ function startDrawing(){
                     );
 
                     ctx.lineTo(
-                        x + Math.random()*4,
+                        x + 16,
                         y + Math.random()*2
                     );
 
                     ctx.stroke();
 
-                    /* hand movement */
+                    /* HAND */
 
                     hand.style.left =
                     (
                         canvas.offsetLeft +
                         x -
-                        60
+                        90
                     ) + "px";
 
                     hand.style.top =
                     (
                         canvas.offsetTop +
                         y -
-                        45
+                        65
                     ) + "px";
 
                     hand.style.transform =
                     `
                     rotate(
                         ${
-                            Math.sin(x/25)*6
+                            Math.sin(x/20)*5
                         }deg
                     )
                     `;
                 }
 
-                x += 2;
-
-                requestAnimationFrame(
-                    drawPixel
-                );
+                x += 8;
             }
 
-            drawPixel();
+            y += 4;
+
+            requestAnimationFrame(
+                drawRow
+            );
         }
 
         function revealFinal(){
@@ -832,7 +799,7 @@ function startDrawing(){
 
             function fadeIn(){
 
-                alpha += 0.02;
+                alpha += 0.04;
 
                 ctx.save();
 
@@ -863,7 +830,7 @@ function startDrawing(){
                     title.innerHTML =
                     `
                     ✨ MY QUEEN ❤️ ✨<br>
-                    You are my forever happiness ❤️
+                    Forever in my heart ❤️
                     `;
                 }
             }
@@ -879,9 +846,9 @@ function startDrawing(){
     }
 }
 
-/* ===================== */
+/* ========================= */
 /* START */
-/* ===================== */
+/* ========================= */
 
 setTimeout(()=>{
 
