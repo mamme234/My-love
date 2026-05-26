@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>MY QUEEN ❤️</title>
 
 <style>
@@ -15,50 +16,398 @@
 
 body{
     overflow:hidden;
+    height:100vh;
     display:flex;
     justify-content:center;
     align-items:center;
-    height:100vh;
+
     background:
-    radial-gradient(circle,#2b0f18,#000);
+    radial-gradient(circle at center,
+    #300015 0%,
+    #120008 45%,
+    #000 100%);
+
     font-family:Arial,sans-serif;
+}
+
+/* ===================== */
+/* BIOMETRIC SCREEN */
+/* ===================== */
+
+#scanScreen{
+    position:fixed;
+    inset:0;
+    background:black;
+    z-index:9999;
+    overflow:hidden;
+}
+
+.cameraGlow{
+    position:absolute;
+
+    width:800px;
+    height:800px;
+
+    border-radius:50%;
+
+    background:
+    radial-gradient(circle,
+    rgba(255,0,120,0.18),
+    transparent 70%);
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    filter:blur(70px);
+
+    animation:pulse 3s infinite alternate;
+}
+
+@keyframes pulse{
+
+    from{
+        transform:
+        translate(-50%,-50%)
+        scale(1);
+
+        opacity:0.5;
+    }
+
+    to{
+        transform:
+        translate(-50%,-50%)
+        scale(1.2);
+
+        opacity:1;
+    }
+}
+
+/* face cards */
+
+.faceBox{
+    position:absolute;
+
+    width:250px;
+    height:320px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    border-radius:30px;
+
+    overflow:hidden;
+
+    border:
+    2px solid rgba(255,255,255,0.2);
+
+    box-shadow:
+    0 0 30px rgba(255,0,120,0.3);
+}
+
+.leftBox{
+    left:8%;
+}
+
+.rightBox{
+    right:8%;
+}
+
+.face{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+}
+
+/* corners */
+
+.corner{
+    position:absolute;
+    width:40px;
+    height:40px;
+    border:4px solid hotpink;
+}
+
+.tl{
+    top:10px;
+    left:10px;
+    border-right:none;
+    border-bottom:none;
+}
+
+.tr{
+    top:10px;
+    right:10px;
+    border-left:none;
+    border-bottom:none;
+}
+
+.bl{
+    bottom:10px;
+    left:10px;
+    border-right:none;
+    border-top:none;
+}
+
+.br{
+    bottom:10px;
+    right:10px;
+    border-left:none;
+    border-top:none;
+}
+
+/* scan line */
+
+.scanLine{
+    position:absolute;
+
+    width:100%;
+    height:5px;
+
+    background:
+    linear-gradient(
+    90deg,
+    transparent,
+    hotpink,
+    white,
+    hotpink,
+    transparent);
+
+    box-shadow:
+    0 0 25px hotpink,
+    0 0 50px deeppink;
+
+    animation:scanMove 2s linear infinite;
+}
+
+@keyframes scanMove{
+
+    from{
+        top:0;
+    }
+
+    to{
+        top:100%;
+    }
+}
+
+/* mesh */
+
+.mesh{
+    position:absolute;
+    inset:0;
+
+    background-image:
+    radial-gradient(
+    rgba(255,105,180,0.8) 1px,
+    transparent 1px);
+
+    background-size:24px 24px;
+
+    opacity:0.3;
+
+    animation:rotateMesh 10s linear infinite;
+}
+
+@keyframes rotateMesh{
+
+    from{
+        transform:rotate(0deg);
+    }
+
+    to{
+        transform:rotate(360deg);
+    }
+}
+
+/* center ring */
+
+.ring{
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    border-radius:50%;
+
+    border:3px solid hotpink;
+
+    left:50%;
+    top:50%;
+
+    transform:translate(-50%,-50%);
+
+    box-shadow:
+    0 0 20px hotpink,
+    inset 0 0 20px hotpink;
+
+    animation:ringPulse 2s infinite;
+}
+
+@keyframes ringPulse{
+
+    0%{
+        transform:
+        translate(-50%,-50%)
+        scale(1);
+
+        opacity:1;
+    }
+
+    100%{
+        transform:
+        translate(-50%,-50%)
+        scale(1.4);
+
+        opacity:0;
+    }
+}
+
+/* scan text */
+
+.scanText{
+    position:absolute;
+
+    bottom:10%;
+
+    width:100%;
+
+    text-align:center;
+
+    color:white;
+
+    font-size:32px;
+
+    letter-spacing:6px;
+
+    text-shadow:
+    0 0 10px pink,
+    0 0 20px deeppink;
+
+    animation:blink 1s infinite;
+}
+
+@keyframes blink{
+
+    50%{
+        opacity:0.5;
+    }
+}
+
+/* ===================== */
+/* MAIN */
+/* ===================== */
+
+.bgGlow{
+    position:fixed;
+
+    width:700px;
+    height:700px;
+
+    border-radius:50%;
+
+    background:
+    rgba(255,120,180,0.1);
+
+    filter:blur(120px);
 }
 
 .container{
     position:relative;
+
+    animation:movieFade 2s ease;
+}
+
+@keyframes movieFade{
+
+    from{
+        opacity:0;
+        transform:scale(0.95);
+    }
+
+    to{
+        opacity:1;
+        transform:scale(1);
+    }
 }
 
 canvas{
-    width:90vw;
-    max-width:700px;
-    border-radius:20px;
+
     background:white;
 
+    border-radius:25px;
+
+    max-width:92vw;
+    max-height:88vh;
+
+    image-rendering:auto;
+
     box-shadow:
-    0 0 20px rgba(255,255,255,0.15),
-    0 0 40px rgba(255,120,180,0.2);
+    0 0 25px rgba(255,255,255,0.2),
+    0 0 80px rgba(255,120,180,0.25);
+
+    animation:cinemaGlow 4s infinite alternate;
 }
 
-/* Pencil */
-#pencil{
+@keyframes cinemaGlow{
+
+    from{
+
+        transform:scale(1);
+
+        box-shadow:
+        0 0 20px rgba(255,255,255,0.2),
+        0 0 60px rgba(255,0,120,0.2);
+    }
+
+    to{
+
+        transform:scale(1.01);
+
+        box-shadow:
+        0 0 40px rgba(255,255,255,0.4),
+        0 0 120px rgba(255,0,120,0.4);
+    }
+}
+
+/* hand */
+
+#hand{
     position:absolute;
-    width:120px;
-    z-index:10;
+
+    width:170px;
+
+    z-index:5;
+
     pointer-events:none;
-    transform-origin:center;
-    filter:drop-shadow(0 0 8px rgba(0,0,0,0.4));
+
+    transition:all 0.03s linear;
+
+    filter:
+    drop-shadow(0 0 15px rgba(0,0,0,0.5))
+    drop-shadow(0 0 25px rgba(255,120,180,0.4));
 }
 
-/* Title */
+/* title */
+
 .title{
     position:absolute;
+
     width:100%;
-    bottom:-90px;
+
+    bottom:-100px;
+
     text-align:center;
+
     color:white;
+
     font-size:24px;
-    letter-spacing:4px;
-    line-height:1.7;
+
+    line-height:1.8;
+
+    letter-spacing:3px;
 
     animation:glow 2s infinite alternate;
 }
@@ -66,38 +415,44 @@ canvas{
 @keyframes glow{
 
     from{
+        opacity:0.7;
         text-shadow:0 0 5px pink;
     }
 
     to{
+        opacity:1;
+
         text-shadow:
-        0 0 10px hotpink,
-        0 0 20px deeppink;
+        0 0 10px pink,
+        0 0 20px hotpink,
+        0 0 40px deeppink;
     }
 }
 
-/* Hearts */
+/* hearts */
+
 .heart{
     position:fixed;
-    color:rgba(255,120,180,0.5);
-    animation:floatUp linear infinite;
+
     pointer-events:none;
+
+    z-index:1;
+
+    animation:float 6s linear forwards;
 }
 
-@keyframes floatUp{
+@keyframes float{
 
     from{
-        transform:translateY(0) scale(1);
-        opacity:0;
-    }
-
-    20%{
-        opacity:1;
+        transform:
+        translateY(0)
+        scale(1);
     }
 
     to{
-        transform:translateY(-120vh) scale(1.7);
-        opacity:0;
+        transform:
+        translateY(-150px)
+        scale(1.5);
     }
 }
 
@@ -105,15 +460,68 @@ canvas{
 </head>
 <body>
 
+<!-- ===================== -->
+<!-- BIOMETRIC -->
+<!-- ===================== -->
+
+<div id="scanScreen">
+
+    <div class="cameraGlow"></div>
+
+    <!-- YOUR PHOTO -->
+
+    <div class="faceBox leftBox">
+
+        <img src="me.jpg" class="face">
+
+        <div class="mesh"></div>
+
+        <div class="scanLine"></div>
+
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
+    </div>
+
+    <!-- HER PHOTO -->
+
+    <div class="faceBox rightBox">
+
+        <img src="her.jpg" class="face">
+
+        <div class="mesh"></div>
+
+        <div class="scanLine"></div>
+
+        <div class="corner tl"></div>
+        <div class="corner tr"></div>
+        <div class="corner bl"></div>
+        <div class="corner br"></div>
+
+    </div>
+
+    <div class="ring"></div>
+
+    <div class="scanText">
+        BIOMETRIC LOVE MATCH ❤️
+    </div>
+
+</div>
+
+<!-- ===================== -->
+<!-- MAIN -->
+<!-- ===================== -->
+
+<div class="bgGlow"></div>
+
 <div class="container">
 
     <canvas id="canvas"></canvas>
 
-    <!-- Pencil -->
-    <img
-    id="pencil"
-    src="https://i.imgur.com/9yG3Y2D.png"
-    >
+    <img id="hand"
+    src="https://pngimg.com/d/paint_brush_PNG24.png">
 
     <div class="title">
         MY QUEEN ❤️
@@ -123,188 +531,377 @@ canvas{
 
 <script>
 
+/* ===================== */
+/* AUDIO */
+/* ===================== */
+
+const audioCtx =
+new (window.AudioContext ||
+window.webkitAudioContext)();
+
+function tone(freq,time,duration){
+
+    const osc =
+    audioCtx.createOscillator();
+
+    const gain =
+    audioCtx.createGain();
+
+    osc.type = "sine";
+
+    osc.frequency.value = freq;
+
+    gain.gain.setValueAtTime(
+        0,
+        audioCtx.currentTime
+    );
+
+    gain.gain.linearRampToValueAtTime(
+        0.03,
+        audioCtx.currentTime + 0.1
+    );
+
+    gain.gain.exponentialRampToValueAtTime(
+        0.0001,
+        audioCtx.currentTime + duration
+    );
+
+    osc.connect(gain);
+
+    gain.connect(audioCtx.destination);
+
+    osc.start(time);
+
+    osc.stop(time + duration);
+}
+
+function playMusic(){
+
+    const notes = [
+        261.63,
+        329.63,
+        392.00,
+        523.25,
+        659.25,
+        523.25
+    ];
+
+    let t = audioCtx.currentTime;
+
+    notes.forEach((n,i)=>{
+
+        tone(
+            n,
+            t + i*0.4,
+            1
+        );
+
+    });
+
+    setTimeout(playMusic,3000);
+}
+
+document.body.addEventListener(
+"click",
+()=>{
+    audioCtx.resume();
+    playMusic();
+},{
+    once:true
+});
+
+/* ===================== */
+/* HEARTS */
+/* ===================== */
+
+function createHeart(){
+
+    const h =
+    document.createElement("div");
+
+    h.className = "heart";
+
+    h.innerHTML = "❤️";
+
+    h.style.left =
+    Math.random()*window.innerWidth
+    + "px";
+
+    h.style.bottom = "-20px";
+
+    h.style.fontSize =
+    (Math.random()*20 + 10)
+    + "px";
+
+    h.style.opacity =
+    Math.random();
+
+    document.body.appendChild(h);
+
+    setTimeout(()=>{
+        h.remove();
+    },6000);
+}
+
+setInterval(createHeart,300);
+
+/* ===================== */
+/* DRAWING */
+/* ===================== */
+
 const canvas =
-document.getElementById('canvas');
+document.getElementById("canvas");
 
 const ctx =
-canvas.getContext('2d');
+canvas.getContext("2d");
 
-const pencil =
-document.getElementById('pencil');
+const hand =
+document.getElementById("hand");
 
 const title =
-document.querySelector('.title');
+document.querySelector(".title");
 
 const img = new Image();
 
-img.src = 'photo.jpg';
+img.src = "photo.jpg";
 
-img.onload = () => {
+function startDrawing(){
 
-    canvas.width = img.width;
-    canvas.height = img.height;
+    img.onload = ()=>{
 
-    // White paper
-    ctx.fillStyle = 'white';
-    ctx.fillRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
+        const scale = 1.5;
 
-    let progress = 0;
+        canvas.width =
+        img.width * scale;
 
-    // SPEED LIKE MBC3
-    const speed = 30;
+        canvas.height =
+        img.height * scale;
 
-    function animate(){
+        ctx.scale(scale,scale);
 
-        // Clear
-        ctx.fillStyle = 'white';
+        ctx.fillStyle = "white";
+
         ctx.fillRect(
             0,
             0,
-            canvas.width,
-            canvas.height
+            img.width,
+            img.height
         );
 
-        // Draw revealed image
-        ctx.drawImage(
+        const hidden =
+        document.createElement("canvas");
+
+        hidden.width = img.width;
+        hidden.height = img.height;
+
+        const hctx =
+        hidden.getContext("2d");
+
+        hctx.drawImage(
             img,
-            0,
-            0,
-            progress,
-            canvas.height,
-            0,
-            0,
-            progress,
-            canvas.height
-        );
-
-        // Pencil Sketch Look
-        let imageData =
-        ctx.getImageData(
-            0,
-            0,
-            progress,
-            canvas.height
-        );
-
-        let data = imageData.data;
-
-        for(let i=0;i<data.length;i+=4){
-
-            const r = data[i];
-            const g = data[i+1];
-            const b = data[i+2];
-
-            const gray =
-            (r+g+b)/3;
-
-            const sketch =
-            gray > 140
-            ? 255
-            : gray*0.55;
-
-            data[i] = sketch;
-            data[i+1] = sketch;
-            data[i+2] = sketch;
-        }
-
-        ctx.putImageData(
-            imageData,
             0,
             0
         );
 
-        // Pencil Position
-        pencil.style.left =
-        (
-            canvas.offsetLeft +
-            progress - 40
-        ) + 'px';
+        const pixels =
+        hctx.getImageData(
+            0,
+            0,
+            img.width,
+            img.height
+        ).data;
 
-        pencil.style.top =
-        (
-            canvas.offsetTop +
-            canvas.height/2
-        ) + 'px';
+        let y = 0;
 
-        pencil.style.transform =
-        'rotate(15deg)';
+        function drawRow(){
 
-        progress += speed;
+            if(y >= img.height){
 
-        if(progress < canvas.width){
+                revealFinal();
 
-            requestAnimationFrame(
-                animate
-            );
+                return;
+            }
 
-        }else{
+            let x = 0;
 
-            // Final poem
-            title.innerHTML = `
-            You are my light,<br>
-            My peace, my queen,<br>
-            My forever love ❤️
-            `;
+            function drawPixel(){
 
-            canvas.animate([
-                {
-                    transform:'scale(1)'
-                },
-                {
-                    transform:'scale(1.03)'
-                },
-                {
-                    transform:'scale(1)'
+                if(x >= img.width){
+
+                    y += 2;
+
+                    requestAnimationFrame(
+                        drawRow
+                    );
+
+                    return;
                 }
-            ],{
-                duration:2500
-            });
+
+                const i =
+                (y * img.width + x) * 4;
+
+                const r = pixels[i];
+                const g = pixels[i+1];
+                const b = pixels[i+2];
+                const a = pixels[i+3];
+
+                const brightness =
+                (r+g+b)/3;
+
+                if(
+                    brightness < 250 &&
+                    a > 0
+                ){
+
+                    ctx.beginPath();
+
+                    ctx.strokeStyle =
+                    `rgba(
+                        ${r},
+                        ${g},
+                        ${b},
+                        0.9
+                    )`;
+
+                    ctx.lineWidth =
+                    Math.random()*1.8 + 0.5;
+
+                    ctx.lineCap = "round";
+
+                    ctx.shadowBlur = 8;
+
+                    ctx.shadowColor =
+                    `rgba(
+                        ${r},
+                        ${g},
+                        ${b},
+                        0.8
+                    )`;
+
+                    ctx.moveTo(
+                        x,
+                        y
+                    );
+
+                    ctx.lineTo(
+                        x + Math.random()*4,
+                        y + Math.random()*2
+                    );
+
+                    ctx.stroke();
+
+                    /* hand movement */
+
+                    hand.style.left =
+                    (
+                        canvas.offsetLeft +
+                        x -
+                        60
+                    ) + "px";
+
+                    hand.style.top =
+                    (
+                        canvas.offsetTop +
+                        y -
+                        45
+                    ) + "px";
+
+                    hand.style.transform =
+                    `
+                    rotate(
+                        ${
+                            Math.sin(x/25)*6
+                        }deg
+                    )
+                    `;
+                }
+
+                x += 2;
+
+                requestAnimationFrame(
+                    drawPixel
+                );
+            }
+
+            drawPixel();
         }
+
+        function revealFinal(){
+
+            let alpha = 0;
+
+            function fadeIn(){
+
+                alpha += 0.02;
+
+                ctx.save();
+
+                ctx.globalAlpha = alpha;
+
+                ctx.shadowBlur = 25;
+
+                ctx.shadowColor = "hotpink";
+
+                ctx.drawImage(
+                    img,
+                    0,
+                    0
+                );
+
+                ctx.restore();
+
+                if(alpha < 1){
+
+                    requestAnimationFrame(
+                        fadeIn
+                    );
+
+                }else{
+
+                    hand.style.opacity = "0";
+
+                    title.innerHTML =
+                    `
+                    ✨ MY QUEEN ❤️ ✨<br>
+                    You are my forever happiness ❤️
+                    `;
+                }
+            }
+
+            fadeIn();
+        }
+
+        drawRow();
+    };
+
+    if(img.complete){
+        img.onload();
     }
-
-    animate();
 }
 
-/* Romantic Hearts */
+/* ===================== */
+/* START */
+/* ===================== */
 
-for(let i=0;i<30;i++){
+setTimeout(()=>{
 
-    const heart =
-    document.createElement('div');
+    document
+    .getElementById("scanScreen")
+    .style.opacity = "0";
 
-    heart.className = 'heart';
+    setTimeout(()=>{
 
-    heart.innerHTML = '❤';
+        document
+        .getElementById("scanScreen")
+        .remove();
 
-    heart.style.left =
-    Math.random()*100 + 'vw';
+        startDrawing();
 
-    heart.style.top =
-    '100vh';
+    },1000);
 
-    heart.style.fontSize =
-    (
-        15 +
-        Math.random()*30
-    ) + 'px';
-
-    heart.style.animationDuration =
-    (
-        4 +
-        Math.random()*5
-    ) + 's';
-
-    document.body.appendChild(
-        heart
-    );
-}
+},5000);
 
 </script>
 
 </body>
-</html>
+    </html>
