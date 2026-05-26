@@ -27,32 +27,16 @@ body{
     font-family:Arial,sans-serif;
 }
 
-/* ========================= */
-/* LOVE SCAN INTRO */
-/* ========================= */
+/* Background Glow */
 
-#scanIntro{
+.bgGlow{
     position:fixed;
-    inset:0;
-    background:black;
-    z-index:9999;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    overflow:hidden;
-}
-
-.scanBg{
-    position:absolute;
-    width:600px;
-    height:600px;
+    width:700px;
+    height:700px;
     border-radius:50%;
-    background:
-    radial-gradient(circle,
-    rgba(255,0,120,0.25),
-    transparent 70%);
-    filter:blur(50px);
-    animation:pulse 3s infinite alternate;
+    background:rgba(255,120,180,0.12);
+    filter:blur(120px);
+    animation:pulse 4s infinite alternate;
 }
 
 @keyframes pulse{
@@ -60,181 +44,76 @@ body{
         transform:scale(1);
         opacity:0.5;
     }
+
     to{
         transform:scale(1.2);
         opacity:1;
     }
 }
 
-.scanFace{
-    width:220px;
-    height:220px;
-    object-fit:cover;
-    border-radius:50%;
-    border:4px solid rgba(255,255,255,0.3);
-
-    box-shadow:
-    0 0 20px rgba(255,0,120,0.5),
-    0 0 40px rgba(255,0,120,0.3);
-
-    position:absolute;
-}
-
-.leftFace{
-    left:15%;
-    animation:floatFace 3s ease-in-out infinite;
-}
-
-.rightFace{
-    right:15%;
-    animation:floatFace 3s ease-in-out infinite reverse;
-}
-
-@keyframes floatFace{
-    0%{
-        transform:translateY(0px);
-    }
-    50%{
-        transform:translateY(-15px);
-    }
-    100%{
-        transform:translateY(0px);
-    }
-}
-
-/* Scan line */
-
-.scanLine{
-    position:absolute;
-    width:100%;
-    height:5px;
-
-    background:
-    linear-gradient(
-    90deg,
-    transparent,
-    hotpink,
-    white,
-    hotpink,
-    transparent);
-
-    box-shadow:
-    0 0 20px hotpink,
-    0 0 40px deeppink;
-
-    animation:scanMove 2s linear infinite;
-}
-
-@keyframes scanMove{
-    from{
-        top:10%;
-    }
-
-    to{
-        top:90%;
-    }
-}
-
-.scanText{
-    position:absolute;
-    bottom:12%;
-    color:white;
-    font-size:28px;
-    letter-spacing:5px;
-
-    text-shadow:
-    0 0 10px pink,
-    0 0 20px deeppink;
-
-    animation:blink 1s infinite;
-}
-
-@keyframes blink{
-    50%{
-        opacity:0.4;
-    }
-}
-
-/* ========================= */
-/* MAIN DRAWING */
-/* ========================= */
-
-.bgGlow{
-    position:fixed;
-    width:700px;
-    height:700px;
-    border-radius:50%;
-    background:rgba(255,120,180,0.15);
-    filter:blur(120px);
-    animation:pulse 4s infinite alternate;
-}
+/* Main Container */
 
 .container{
     position:relative;
-    animation:fadeIn 3s ease;
 }
 
 canvas{
     background:white;
     border-radius:25px;
-    max-width:90vw;
-    max-height:90vh;
+
+    max-width:92vw;
+    max-height:88vh;
 
     box-shadow:
     0 0 20px rgba(255,255,255,0.15),
-    0 0 50px rgba(255,120,180,0.2),
-    0 0 100px rgba(255,120,180,0.1);
+    0 0 60px rgba(255,120,180,0.25),
+    0 0 120px rgba(255,120,180,0.15);
 }
 
-@keyframes fadeIn{
-    from{
-        opacity:0;
-        transform:scale(0.8);
-    }
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
-}
-
-/* Drawing Hand */
+/* Hand */
 
 #hand{
     position:absolute;
-    width:140px;
-    pointer-events:none;
+    width:130px;
     z-index:5;
+    pointer-events:none;
 
     filter:
     drop-shadow(0 0 10px rgba(0,0,0,0.5))
-    drop-shadow(0 0 20px rgba(255,120,180,0.25));
+    drop-shadow(0 0 20px rgba(255,120,180,0.3));
 }
 
-/* Title */
+/* Romantic Text */
 
 .title{
     position:absolute;
     width:100%;
     bottom:-90px;
+
     text-align:center;
     color:white;
+
     font-size:24px;
-    letter-spacing:3px;
-    animation:glow 2s infinite alternate;
     line-height:1.7;
+    letter-spacing:3px;
+
+    animation:glow 2s infinite alternate;
 }
 
 @keyframes glow{
+
     from{
+        opacity:0.6;
         text-shadow:0 0 5px pink;
-        opacity:0.7;
     }
+
     to{
+        opacity:1;
+
         text-shadow:
         0 0 10px pink,
         0 0 20px hotpink,
         0 0 40px deeppink;
-        opacity:1;
     }
 }
 
@@ -248,6 +127,7 @@ canvas{
 }
 
 @keyframes floatUp{
+
     from{
         transform:translateY(0) scale(1);
         opacity:0;
@@ -272,6 +152,7 @@ canvas{
 }
 
 @keyframes sparkleAnim{
+
     0%{
         opacity:0;
         transform:scale(0.5);
@@ -292,25 +173,6 @@ canvas{
 </head>
 <body>
 
-<!-- SCAN INTRO -->
-
-<div id="scanIntro">
-
-    <div class="scanBg"></div>
-
-    <img src="me.jpg" class="scanFace leftFace">
-    <img src="her.jpg" class="scanFace rightFace">
-
-    <div class="scanLine"></div>
-
-    <div class="scanText">
-        LOVE SCAN INITIALIZING ❤️
-    </div>
-
-</div>
-
-<!-- MAIN -->
-
 <div class="bgGlow"></div>
 
 <div class="container">
@@ -327,154 +189,310 @@ canvas{
 
 </div>
 
-<!-- Romantic Song -->
+<!-- Romantic Music -->
+<!-- Put your song in same folder -->
+<!-- Rename it to love.mp3 -->
+
 <audio autoplay loop>
     <source src="love.mp3" type="audio/mpeg">
 </audio>
 
 <script>
 
-const canvas = document.getElementById('canvas');
-const ctx = canvas.getContext('2d');
-const hand = document.getElementById('hand');
-const title = document.querySelector('.title');
+const canvas =
+document.getElementById('canvas');
+
+const ctx =
+canvas.getContext('2d');
+
+const hand =
+document.getElementById('hand');
+
+const title =
+document.querySelector('.title');
 
 const img = new Image();
+
 img.src = 'photo.jpg';
 
-img.onload = () => {
+/* ========================= */
+/* FRONT CAMERA SCAN */
+/* ========================= */
 
-    const scale = 1.5;
+async function startCamera(){
 
-    canvas.width = img.width * scale;
-    canvas.height = img.height * scale;
+    const video =
+    document.createElement('video');
 
-    ctx.scale(scale,scale);
+    video.autoplay = true;
+    video.playsInline = true;
 
-    ctx.imageSmoothingEnabled = true;
-    ctx.imageSmoothingQuality = 'high';
+    video.style.position = 'fixed';
+    video.style.inset = '0';
 
-    ctx.fillStyle = 'white';
-    ctx.fillRect(0,0,canvas.width,canvas.height);
+    video.style.width = '100%';
+    video.style.height = '100%';
 
-    let y = 0;
+    video.style.objectFit = 'cover';
 
-    function draw(){
+    video.style.zIndex = '9998';
 
-        ctx.drawImage(
-            img,
-            0,y,
-            img.width,2,
-            0,y,
-            img.width,2
-        );
+    document.body.appendChild(video);
 
-        let imageData =
-        ctx.getImageData(0,y,img.width,2);
+    try{
 
-        let data = imageData.data;
+        const stream =
+        await navigator.mediaDevices
+        .getUserMedia({
+            video:{
+                facingMode:'user'
+            }
+        });
 
-        for(let i=0;i<data.length;i+=4){
+        video.srcObject = stream;
 
-            const r = data[i];
-            const g = data[i+1];
-            const b = data[i+2];
+        // scan line
 
-            const gray =
-            (r*0.3 + g*0.59 + b*0.11);
+        const scan =
+        document.createElement('div');
 
-            const shade =
-            gray > 150
-            ? 255
-            : gray * 0.45;
+        scan.style.position = 'fixed';
 
-            data[i] = shade;
-            data[i+1] = shade;
-            data[i+2] = shade;
-        }
+        scan.style.left = '0';
 
-        ctx.putImageData(imageData,0,y);
+        scan.style.width = '100%';
 
-        // Pencil stroke lines
-        ctx.beginPath();
+        scan.style.height = '5px';
 
-        ctx.moveTo(
-            Math.random()*20,
-            y
-        );
+        scan.style.background =
+        'linear-gradient(90deg,transparent,pink,white,pink,transparent)';
 
-        ctx.lineTo(
-            canvas.width,
-            y + Math.random()*2
-        );
+        scan.style.boxShadow =
+        '0 0 20px hotpink';
 
-        ctx.strokeStyle =
-        'rgba(0,0,0,0.08)';
+        scan.style.zIndex = '9999';
 
-        ctx.lineWidth = 1;
+        document.body.appendChild(scan);
 
-        ctx.stroke();
+        // text
 
-        // Hand movement
+        const txt =
+        document.createElement('div');
 
-        hand.style.left =
-        (canvas.offsetLeft + canvas.width*0.60)
-        + 'px';
+        txt.innerHTML =
+        'LOVE SCAN INITIALIZING ❤️';
 
-        hand.style.top =
-        (canvas.offsetTop + y - 35)
-        + 'px';
+        txt.style.position = 'fixed';
 
-        hand.style.transform =
-        `rotate(${8 + Math.sin(y/20)*5}deg)`;
+        txt.style.bottom = '12%';
 
-        y += 2;
+        txt.style.width = '100%';
 
-        if(y < img.height){
+        txt.style.textAlign = 'center';
 
-            requestAnimationFrame(draw);
+        txt.style.color = 'white';
 
-        }else{
+        txt.style.fontSize = '28px';
 
-            title.innerHTML = `
-            Forever in my heart,<br>
-            Forever in my soul,<br>
-            You are the smile in my darkest nights,<br>
-            The reason my world feels whole ❤️
-            `;
+        txt.style.letterSpacing = '4px';
 
-            title.style.fontSize = '20px';
+        txt.style.textShadow =
+        '0 0 10px pink';
 
-            canvas.animate([
-                {
-                    filter:'brightness(1)',
-                    transform:'scale(1)'
-                },
-                {
-                    filter:'brightness(1.15)',
-                    transform:'scale(1.04)'
-                },
-                {
-                    filter:'brightness(1)',
-                    transform:'scale(1)'
-                }
-            ],{
-                duration:4000
-            });
-        }
+        txt.style.zIndex = '9999';
+
+        document.body.appendChild(txt);
+
+        let pos = 0;
+
+        const interval =
+        setInterval(()=>{
+
+            pos += 8;
+
+            scan.style.top =
+            pos + 'px';
+
+            if(pos > window.innerHeight){
+
+                clearInterval(interval);
+
+                stream.getTracks()
+                .forEach(track=>track.stop());
+
+                video.remove();
+                scan.remove();
+                txt.remove();
+
+                startDrawing();
+            }
+
+        },16);
+
+    }catch(e){
+
+        // if camera denied
+        startDrawing();
     }
-
-    // Start drawing after scan intro
-
-    setTimeout(()=>{
-
-        document.getElementById('scanIntro')
-        .style.display = 'none';
-
-        draw();
-
-    },5000);
 }
+
+/* ========================= */
+/* REAL SKETCH DRAWING */
+/* ========================= */
+
+function startDrawing(){
+
+    img.onload = ()=>{
+
+        canvas.width = img.width;
+        canvas.height = img.height;
+
+        ctx.fillStyle = 'white';
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        // hidden image
+
+        const hidden =
+        document.createElement('canvas');
+
+        hidden.width = img.width;
+        hidden.height = img.height;
+
+        const hctx =
+        hidden.getContext('2d');
+
+        hctx.drawImage(img,0,0);
+
+        const pixels =
+        hctx.getImageData(
+            0,
+            0,
+            img.width,
+            img.height
+        ).data;
+
+        let points = [];
+
+        // create draw points
+
+        for(let y=0;y<img.height;y+=3){
+
+            for(let x=0;x<img.width;x+=3){
+
+                const i =
+                (y*img.width + x)*4;
+
+                const r = pixels[i];
+                const g = pixels[i+1];
+                const b = pixels[i+2];
+
+                const gray =
+                (r+g+b)/3;
+
+                if(gray < 180){
+
+                    points.push({
+                        x,
+                        y,
+                        shade:gray
+                    });
+                }
+            }
+        }
+
+        let index = 0;
+
+        function animate(){
+
+            for(let s=0;s<90;s++){
+
+                if(index >= points.length){
+
+                    title.innerHTML =
+                    `
+                    Forever in my heart ❤️<br>
+                    Forever in my soul ❤️<br>
+                    You are my happiness forever ❤️
+                    `;
+
+                    canvas.animate([
+                        {
+                            transform:'scale(1)'
+                        },
+                        {
+                            transform:'scale(1.03)'
+                        },
+                        {
+                            transform:'scale(1)'
+                        }
+                    ],{
+                        duration:3000
+                    });
+
+                    return;
+                }
+
+                const p =
+                points[index];
+
+                // realistic sketch stroke
+
+                ctx.beginPath();
+
+                ctx.strokeStyle =
+                `rgba(0,0,0,${
+                    1 - p.shade/255
+                })`;
+
+                ctx.lineWidth =
+                Math.random()*1.5;
+
+                ctx.moveTo(
+                    p.x,
+                    p.y
+                );
+
+                ctx.lineTo(
+                    p.x + Math.random()*4,
+                    p.y + Math.random()*2
+                );
+
+                ctx.stroke();
+
+                // move hand
+
+                hand.style.left =
+                (canvas.offsetLeft + p.x - 45)
+                + 'px';
+
+                hand.style.top =
+                (canvas.offsetTop + p.y - 25)
+                + 'px';
+
+                hand.style.transform =
+                `rotate(${
+                    8 + Math.sin(index/20)*5
+                }deg)`;
+
+                index++;
+            }
+
+            requestAnimationFrame(animate);
+        }
+
+        animate();
+    }
+}
+
+/* START */
+
+startCamera();
 
 /* Floating Hearts */
 
@@ -484,6 +502,7 @@ for(let i=0;i<35;i++){
     document.createElement('div');
 
     heart.className = 'heart';
+
     heart.innerHTML = '❤';
 
     heart.style.left =
@@ -534,4 +553,4 @@ setInterval(()=>{
 </script>
 
 </body>
-    </html>
+</html>
