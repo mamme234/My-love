@@ -29,90 +29,46 @@ body{
     font-family:Arial,sans-serif;
 }
 
-/* ========================= */
 /* SCAN SCREEN */
-/* ========================= */
 
 #scanScreen{
     position:fixed;
     inset:0;
     background:black;
     z-index:9999;
-    overflow:hidden;
 }
 
 .cameraGlow{
     position:absolute;
-
     width:800px;
     height:800px;
-
     border-radius:50%;
-
-    background:
-    radial-gradient(circle,
-    rgba(255,0,120,0.2),
-    transparent 70%);
-
+    background:radial-gradient(circle, rgba(255,0,120,0.2), transparent 70%);
     left:50%;
     top:50%;
-
     transform:translate(-50%,-50%);
-
     filter:blur(70px);
-
     animation:pulse 3s infinite alternate;
 }
 
 @keyframes pulse{
-
-    from{
-        transform:
-        translate(-50%,-50%)
-        scale(1);
-
-        opacity:0.5;
-    }
-
-    to{
-        transform:
-        translate(-50%,-50%)
-        scale(1.2);
-
-        opacity:1;
-    }
+    from{transform:translate(-50%,-50%) scale(1);opacity:0.5;}
+    to{transform:translate(-50%,-50%) scale(1.2);opacity:1;}
 }
-
-/* face cards */
 
 .faceBox{
     position:absolute;
-
     width:240px;
     height:320px;
-
     top:50%;
-
     transform:translateY(-50%);
-
     border-radius:30px;
-
     overflow:hidden;
-
-    border:
-    2px solid rgba(255,255,255,0.2);
-
-    box-shadow:
-    0 0 30px rgba(255,0,120,0.25);
+    border:2px solid rgba(255,255,255,0.2);
 }
 
-.leftBox{
-    left:8%;
-}
-
-.rightBox{
-    right:8%;
-}
+.leftBox{left:8%;}
+.rightBox{right:8%;}
 
 .face{
     width:100%;
@@ -120,755 +76,244 @@ body{
     object-fit:cover;
 }
 
-.corner{
-    position:absolute;
-
-    width:40px;
-    height:40px;
-
-    border:4px solid hotpink;
-}
-
-.tl{
-    top:10px;
-    left:10px;
-    border-right:none;
-    border-bottom:none;
-}
-
-.tr{
-    top:10px;
-    right:10px;
-    border-left:none;
-    border-bottom:none;
-}
-
-.bl{
-    bottom:10px;
-    left:10px;
-    border-right:none;
-    border-top:none;
-}
-
-.br{
-    bottom:10px;
-    right:10px;
-    border-left:none;
-    border-top:none;
-}
-
 .scanLine{
     position:absolute;
-
     width:100%;
     height:5px;
-
-    background:
-    linear-gradient(
-    90deg,
-    transparent,
-    hotpink,
-    white,
-    hotpink,
-    transparent);
-
-    box-shadow:
-    0 0 25px hotpink,
-    0 0 50px deeppink;
-
+    background:linear-gradient(90deg,transparent,hotpink,white,hotpink,transparent);
+    box-shadow:0 0 25px hotpink;
     animation:scanMove 2s linear infinite;
 }
 
 @keyframes scanMove{
-
-    from{
-        top:0;
-    }
-
-    to{
-        top:100%;
-    }
-}
-
-.mesh{
-    position:absolute;
-    inset:0;
-
-    background-image:
-    radial-gradient(
-    rgba(255,105,180,0.8) 1px,
-    transparent 1px);
-
-    background-size:24px 24px;
-
-    opacity:0.3;
-
-    animation:rotateMesh 10s linear infinite;
-}
-
-@keyframes rotateMesh{
-
-    from{
-        transform:rotate(0deg);
-    }
-
-    to{
-        transform:rotate(360deg);
-    }
+    from{top:0;}
+    to{top:100%;}
 }
 
 .ring{
     position:absolute;
-
-    width:180px;
-    height:180px;
-
+    width:180px;height:180px;
     border-radius:50%;
-
     border:3px solid hotpink;
-
-    left:50%;
-    top:50%;
-
+    left:50%;top:50%;
     transform:translate(-50%,-50%);
-
-    box-shadow:
-    0 0 20px hotpink,
-    inset 0 0 20px hotpink;
-
     animation:ringPulse 2s infinite;
 }
 
 @keyframes ringPulse{
-
-    0%{
-        transform:
-        translate(-50%,-50%)
-        scale(1);
-
-        opacity:1;
-    }
-
-    100%{
-        transform:
-        translate(-50%,-50%)
-        scale(1.4);
-
-        opacity:0;
-    }
+    0%{transform:translate(-50%,-50%) scale(1);opacity:1;}
+    100%{transform:translate(-50%,-50%) scale(1.4);opacity:0;}
 }
 
 .scanText{
     position:absolute;
-
     bottom:10%;
-
     width:100%;
-
     text-align:center;
-
     color:white;
-
-    font-size:32px;
-
-    letter-spacing:6px;
-
-    text-shadow:
-    0 0 10px pink,
-    0 0 20px deeppink;
-
-    animation:blink 1s infinite;
+    font-size:30px;
+    letter-spacing:5px;
 }
 
-@keyframes blink{
-
-    50%{
-        opacity:0.5;
-    }
-}
-
-/* ========================= */
 /* MAIN */
-/* ========================= */
-
-.bgGlow{
-    position:fixed;
-
-    width:700px;
-    height:700px;
-
-    border-radius:50%;
-
-    background:
-    rgba(255,120,180,0.1);
-
-    filter:blur(120px);
-}
-
-.container{
-    position:relative;
-}
 
 canvas{
-
     background:white;
-
     border-radius:25px;
-
     max-width:92vw;
     max-height:88vh;
-
-    box-shadow:
-    0 0 25px rgba(255,255,255,0.2),
-    0 0 80px rgba(255,120,180,0.25);
-
-    animation:cinemaGlow 4s infinite alternate;
+    box-shadow:0 0 80px rgba(255,0,120,0.3);
 }
-
-@keyframes cinemaGlow{
-
-    from{
-
-        transform:scale(1);
-
-        box-shadow:
-        0 0 20px rgba(255,255,255,0.2),
-        0 0 60px rgba(255,0,120,0.2);
-    }
-
-    to{
-
-        transform:scale(1.01);
-
-        box-shadow:
-        0 0 35px rgba(255,255,255,0.4),
-        0 0 120px rgba(255,0,120,0.4);
-    }
-}
-
-/* ========================= */
-/* CUSTOM HAND */
-/* ========================= */
 
 #hand{
     position:absolute;
-
-    width:220px;
-
-    z-index:5;
-
+    width:200px;
     pointer-events:none;
-
-    transition:all 0.02s linear;
-
-    transform-origin:top left;
-
-    filter:
-    drop-shadow(0 0 10px rgba(0,0,0,0.5))
-    drop-shadow(0 0 20px rgba(255,0,120,0.4));
+    z-index:5;
+    transition:0.03s;
 }
-
-/* ========================= */
-/* TITLE */
-/* ========================= */
 
 .title{
     position:absolute;
-
+    bottom:-90px;
     width:100%;
-
-    bottom:-95px;
-
     text-align:center;
-
     color:white;
-
     font-size:24px;
-
-    line-height:1.7;
-
     letter-spacing:3px;
-
-    animation:glow 2s infinite alternate;
-}
-
-@keyframes glow{
-
-    from{
-        opacity:0.7;
-        text-shadow:0 0 5px pink;
-    }
-
-    to{
-        opacity:1;
-
-        text-shadow:
-        0 0 10px pink,
-        0 0 20px hotpink,
-        0 0 40px deeppink;
-    }
-}
-
-/* hearts */
-
-.heart{
-    position:fixed;
-
-    pointer-events:none;
-
-    z-index:1;
-
-    animation:float 6s linear forwards;
-}
-
-@keyframes float{
-
-    from{
-        transform:
-        translateY(0)
-        scale(1);
-    }
-
-    to{
-        transform:
-        translateY(-150px)
-        scale(1.5);
-    }
 }
 
 </style>
 </head>
+
 <body>
 
-<!-- ========================= -->
-<!-- SCAN -->
-<!-- ========================= -->
-
 <div id="scanScreen">
-
     <div class="cameraGlow"></div>
 
     <div class="faceBox leftBox">
-
         <img src="me.jpg" class="face">
-
-        <div class="mesh"></div>
-
         <div class="scanLine"></div>
-
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
-
     </div>
 
     <div class="faceBox rightBox">
-
         <img src="her.jpg" class="face">
-
-        <div class="mesh"></div>
-
         <div class="scanLine"></div>
-
-        <div class="corner tl"></div>
-        <div class="corner tr"></div>
-        <div class="corner bl"></div>
-        <div class="corner br"></div>
-
     </div>
 
     <div class="ring"></div>
 
-    <div class="scanText">
-        BIOMETRIC LOVE MATCH ❤️
-    </div>
-
+    <div class="scanText">BIOMETRIC LOVE MATCH ❤️</div>
 </div>
 
-<!-- ========================= -->
-<!-- MAIN -->
-<!-- ========================= -->
+<canvas id="canvas"></canvas>
 
-<div class="bgGlow"></div>
+<img id="hand"
+src="https://pngimg.com/d/paint_brush_PNG24.png">
 
-<div class="container">
-
-    <canvas id="canvas"></canvas>
-
-    <!-- CUSTOM SVG HAND -->
-
-    <img id="hand"
-    src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='220'%3E%3Crect width='400' height='220' fill='transparent'/%3E%3Cg transform='rotate(-10 120 120)'%3E%3Cellipse cx='110' cy='120' rx='70' ry='45' fill='%23f1c7a3'/%3E%3Crect x='150' y='92' width='170' height='18' rx='9' fill='%23d18b00'/%3E%3Cpolygon points='320,85 390,101 390,119 320,109' fill='%23333'/%3E%3Cpolygon points='390,101 400,110 390,119' fill='%23000'/%3E%3C/g%3E%3C/svg%3E">
-
-    <div class="title">
-        MY QUEEN ❤️
-    </div>
-
-</div>
+<div class="title">MY QUEEN ❤️</div>
 
 <script>
 
-/* ========================= */
-/* MUSIC */
-/* ========================= */
-
-const audioCtx =
-new (window.AudioContext ||
-window.webkitAudioContext)();
-
-function tone(freq,time,duration){
-
-    const osc =
-    audioCtx.createOscillator();
-
-    const gain =
-    audioCtx.createGain();
-
-    osc.type = "sine";
-
-    osc.frequency.value = freq;
-
-    gain.gain.setValueAtTime(
-        0,
-        audioCtx.currentTime
-    );
-
-    gain.gain.linearRampToValueAtTime(
-        0.03,
-        audioCtx.currentTime + 0.1
-    );
-
-    gain.gain.exponentialRampToValueAtTime(
-        0.0001,
-        audioCtx.currentTime + duration
-    );
-
-    osc.connect(gain);
-
-    gain.connect(audioCtx.destination);
-
-    osc.start(time);
-
-    osc.stop(time + duration);
-}
-
-function playMusic(){
-
-    const notes = [
-        261.63,
-        329.63,
-        392.00,
-        523.25,
-        659.25,
-        523.25
-    ];
-
-    let t = audioCtx.currentTime;
-
-    notes.forEach((n,i)=>{
-
-        tone(
-            n,
-            t + i*0.4,
-            1
-        );
-
-    });
-
-    setTimeout(playMusic,3000);
-}
-
-document.body.addEventListener(
-"click",
-()=>{
-    audioCtx.resume();
-    playMusic();
-},{
-    once:true
-});
-
-/* ========================= */
-/* HEARTS */
-/* ========================= */
-
-function createHeart(){
-
-    const h =
-    document.createElement("div");
-
-    h.className = "heart";
-
-    h.innerHTML = "❤️";
-
-    h.style.left =
-    Math.random()*window.innerWidth
-    + "px";
-
-    h.style.bottom = "-20px";
-
-    h.style.fontSize =
-    (Math.random()*20 + 10)
-    + "px";
-
-    h.style.opacity =
-    Math.random();
-
-    document.body.appendChild(h);
-
-    setTimeout(()=>{
-        h.remove();
-    },6000);
-}
-
-setInterval(createHeart,300);
-
-/* ========================= */
-/* DRAWING */
-/* ========================= */
-
-const canvas =
-document.getElementById("canvas");
-
-const ctx =
-canvas.getContext("2d");
-
-const hand =
-document.getElementById("hand");
-
-const title =
-document.querySelector(".title");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+const hand = document.getElementById("hand");
+const title = document.querySelector(".title");
 
 const img = new Image();
-
 img.src = "photo.jpg";
+
+let pixels;
 
 function startDrawing(){
 
-    img.onload = ()=>{
+img.onload = ()=>{
 
-        const scale = 1.2;
+    canvas.width = img.width;
+    canvas.height = img.height;
 
-        canvas.width =
-        img.width * scale;
+    ctx.fillStyle="white";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
 
-        canvas.height =
-        img.height * scale;
+    const hidden = document.createElement("canvas");
+    hidden.width = img.width;
+    hidden.height = img.height;
 
-        ctx.scale(scale,scale);
+    const hctx = hidden.getContext("2d");
+    hctx.drawImage(img,0,0);
 
-        ctx.fillStyle = "white";
+    pixels = hctx.getImageData(0,0,img.width,img.height).data;
 
-        ctx.fillRect(
-            0,
-            0,
-            img.width,
-            img.height
-        );
+    drawFromFace();
+};
 
-        const hidden =
-        document.createElement("canvas");
+if(img.complete) img.onload();
+}
 
-        hidden.width = img.width;
-        hidden.height = img.height;
+/* ===================== */
+/* START FROM FACE */
+/* ===================== */
 
-        const hctx =
-        hidden.getContext("2d");
+function drawFromFace(){
 
-        hctx.drawImage(img,0,0);
+const cx = img.width/2;
+const cy = img.height/2.3;
 
-        const pixels =
-        hctx.getImageData(
-            0,
-            0,
-            img.width,
-            img.height
-        ).data;
+let r = 1;
 
-        let y = 0;
+function loop(){
 
-        /* WIDE PENCIL FAST DRAW */
+if(r > Math.max(img.width,img.height)){
+    revealFinal();
+    return;
+}
 
-        function drawRow(){
+for(let a=0;a<360;a+=2){
 
-            if(y >= img.height){
+    const rad = a*Math.PI/180;
 
-                revealFinal();
+    const x = Math.floor(cx + Math.cos(rad)*r);
+    const y = Math.floor(cy + Math.sin(rad)*r);
 
-                return;
-            }
+    if(x<0||y<0||x>=img.width||y>=img.height) continue;
 
-            let x = 0;
+    const i = (y*img.width+x)*4;
 
-            while(x < img.width){
+    const R = pixels[i];
+    const G = pixels[i+1];
+    const B = pixels[i+2];
+    const A = pixels[i+3];
 
-                const i =
-                (y * img.width + x) * 4;
+    const br = (R+G+B)/3;
 
-                const r = pixels[i];
-                const g = pixels[i+1];
-                const b = pixels[i+2];
-                const a = pixels[i+3];
+    if(br < 250 && A>0){
 
-                const brightness =
-                (r+g+b)/3;
+        ctx.beginPath();
 
-                if(
-                    brightness < 248 &&
-                    a > 0
-                ){
+        ctx.strokeStyle = `rgba(${R},${G},${B},0.95)`;
 
-                    ctx.beginPath();
+        ctx.lineWidth = 6;
 
-                    ctx.strokeStyle =
-                    `rgba(
-                        ${r},
-                        ${g},
-                        ${b},
-                        0.92
-                    )`;
+        ctx.lineCap = "round";
 
-                    /* WIDE PENCIL */
+        ctx.shadowBlur = 10;
 
-                    ctx.lineWidth =
-                    5 + Math.random()*3;
+        ctx.shadowColor = `rgba(${R},${G},${B},0.6)`;
 
-                    ctx.lineCap = "round";
+        ctx.moveTo(x,y);
+        ctx.lineTo(x+10,y+3);
+        ctx.stroke();
 
-                    ctx.shadowBlur = 8;
-
-                    ctx.shadowColor =
-                    `rgba(
-                        ${r},
-                        ${g},
-                        ${b},
-                        0.7
-                    )`;
-
-                    ctx.moveTo(
-                        x,
-                        y
-                    );
-
-                    ctx.lineTo(
-                        x + 16,
-                        y + Math.random()*2
-                    );
-
-                    ctx.stroke();
-
-                    /* HAND */
-
-                    hand.style.left =
-                    (
-                        canvas.offsetLeft +
-                        x -
-                        90
-                    ) + "px";
-
-                    hand.style.top =
-                    (
-                        canvas.offsetTop +
-                        y -
-                        65
-                    ) + "px";
-
-                    hand.style.transform =
-                    `
-                    rotate(
-                        ${
-                            Math.sin(x/20)*5
-                        }deg
-                    )
-                    `;
-                }
-
-                x += 8;
-            }
-
-            y += 4;
-
-            requestAnimationFrame(
-                drawRow
-            );
-        }
-
-        function revealFinal(){
-
-            let alpha = 0;
-
-            function fadeIn(){
-
-                alpha += 0.04;
-
-                ctx.save();
-
-                ctx.globalAlpha = alpha;
-
-                ctx.shadowBlur = 25;
-
-                ctx.shadowColor = "hotpink";
-
-                ctx.drawImage(
-                    img,
-                    0,
-                    0
-                );
-
-                ctx.restore();
-
-                if(alpha < 1){
-
-                    requestAnimationFrame(
-                        fadeIn
-                    );
-
-                }else{
-
-                    hand.style.opacity = "0";
-
-                    title.innerHTML =
-                    `
-                    ✨ MY QUEEN ❤️ ✨<br>
-                    Forever in my heart ❤️
-                    `;
-                }
-            }
-
-            fadeIn();
-        }
-
-        drawRow();
-    };
-
-    if(img.complete){
-        img.onload();
+        hand.style.left = (canvas.offsetLeft + x - 90) + "px";
+        hand.style.top = (canvas.offsetTop + y - 70) + "px";
     }
 }
 
-/* ========================= */
-/* START */
-/* ========================= */
+r += 3;
+
+requestAnimationFrame(loop);
+
+}
+
+loop();
+}
+
+/* ===================== */
+/* FINAL REVEAL */
+/* ===================== */
+
+function revealFinal(){
+
+let a = 0;
+
+function fade(){
+
+a += 0.03;
+
+ctx.globalAlpha = a;
+ctx.drawImage(img,0,0);
+
+if(a < 1){
+requestAnimationFrame(fade);
+}
+else{
+hand.style.opacity="0";
+title.innerHTML="✨ MY QUEEN ❤️ ✨<br>Forever Love ❤️";
+}
+
+}
+
+fade();
+}
+
+/* START AFTER SCAN */
 
 setTimeout(()=>{
-
-    document
-    .getElementById("scanScreen")
-    .style.opacity = "0";
-
-    setTimeout(()=>{
-
-        document
-        .getElementById("scanScreen")
-        .remove();
-
-        startDrawing();
-
-    },1000);
-
+document.getElementById("scanScreen").remove();
+startDrawing();
 },5000);
 
 </script>
 
 </body>
-    </html>
+</html>
